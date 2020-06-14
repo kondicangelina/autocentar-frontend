@@ -1,20 +1,215 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!--<div>
+  <button>
+    [[routerLink]="['/home']" routerLinkActive="router-link-active" ]
+    <a>Autocentar</a>
+  </button>
+  <button>
+    [[routerLink]="['/kategorijausluga']" routerLinkActive="router-link-active" ]
+    <a>Kategorije usluga</a>
+  </button>
+  <button>
+    [[routerLink]="['/kategorijavozila']" routerLinkActive="router-link-active" ]
+    <a>Kategorija vozila</a>
+  </button>
+  <button>
+    [[routerLink]="['/markavozila']" routerLinkActive="router-link-active" ]
+    <a>Marka vozila</a>
+  </button>
+  <button>
+    [[routerLink]="['/modelvozila']" routerLinkActive="router-link-active" ]
+    <a>Model vozila</a>
+  </button>
+  <button>
+    [[routerLink]="['/tipvozila']" routerLinkActive="router-link-active" ]
+    <a>Tip vozila</a>
+  </button>
+  <button>
+    [[routerLink]="['/vozilo']" routerLinkActive="router-link-active" ]
+    <a>Vozilo</a>
+  </button>
+  <button>
+    [[routerLink]="['/osiguranje']" routerLinkActive="router-link-active" ]
+    <a>Osiguranje</a>
+  </button>
+  <button>
+    [[routerLink]="['/rezervacija']" routerLinkActive="router-link-active" ]
+    <a>Rezervacija</a>
+  </button>
+  <button>
+    [[routerLink]="['/registracija']" routerLinkActive="router-link-active" ]
+    <a>Registracija</a>
+  </button>
+  <button>
+
+    <a mat-button [routerLink]="['/cenovnik']">Cenovnik</a>
+  </button>
+  <button>
+
+    <a [routerLink]="['/naplata']">Naplata</a>
+  </button>
+
+</div>-->
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="over" [fixedInViewport]="true" opened mode="side">
+    <mat-accordion>
+      <a mat-button style="text-align: center">
+      <mat-icon [routerLink]="['/home']">AutoCentar</mat-icon>
+    </a>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Usluge
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/kategorijausluga']">Kategorije usluga</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Evidencija vozila
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/kategorijavozila']">Kategorije vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/markavozila']">Marke vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/modelvozila']">Modeli vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/tipvozila']">Tipovi vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/vozilo']">Vozila</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Evidencija osiguranja
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/osiguranje']">Osiguranje</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Evidencija rezervacija
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/rezervacija']">Rezervacije</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Evidencija registracija
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/registracije']">Registracije</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Cenovnik usluga
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/cenovnik']">Cenovnik</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/naplata']">Izvrsene naplate</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         Korisnici
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/korisnik']">Fizička lica</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button [routerLink]="['/korisnikpl']">Pravna lica</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Administracija
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button>Administracija usluga</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija cenovnika</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija marke vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija modela vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija kategorija vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija tipova vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija osiguranja vozila</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija korisnika</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija korisnika - pravna lica</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija rezervacija</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija registracija</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Administracija naplata</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         Profil
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <a mat-button>Posetilac</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Klijent</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Sluzbenik</a>
+      </mat-nav-list>
+      <mat-nav-list>
+        <a mat-button>Admin</a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+    </mat-accordion>
+  </mat-sidenav>
+  <router-outlet></router-outlet>
+</mat-sidenav-container>
 
