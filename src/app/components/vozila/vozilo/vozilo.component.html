@@ -1,3 +1,111 @@
-<p>
-  vozilo works!
-</p>
+<mat-toolbar color="primary">
+  <span class="title-center">Vozila</span>
+</mat-toolbar>
+<div class="container mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <mat-table #table [dataSource]="dataSource"  matSort class="mat-cell">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="kategorijausluga" [sticky]="true">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Kategorija usluga</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.kategorijausluga }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="brojsasije">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Broj sasije</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.brojsasije }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="brojmotora">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Broj motora</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.brojmotora }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pogonvozila">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pogon vozila</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.pogonvozila }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="godiste">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Godiste</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.godiste }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="brojvrata">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Broj vrata</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.brojvrata }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="brojmesta">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Broj mesta</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.brojmesta }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="vrstagoriva">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Vrsta goriva</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.vrstagoriva }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="boja">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Boja</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.boja }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="kw_ks">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>KW/KS</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.kw_ks }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="zelenikarton">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Zeleni karton</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.zelenikarton }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="kategorijavozila">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Kategorija vozila</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.kategorijavozila }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tipvozila">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tip vozila</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.tipvozila }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="markavozila">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Marka vozila</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.markavozila }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="modelvozila">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Model vozila</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.modelvozila }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="cenavozila">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>cenavozila</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.cenavozila }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="oprema">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Oprema</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.oprema }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="slika">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Slika</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.slika }}</mat-cell>
+    </ng-container>
+
+
+    <!--actions-->
+    <ng-container matColumnDef="actions" [sticky]="false">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="openDialog(1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="primary" (click)="openDialog(2, row.id, row.nazivtipavozila)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openDialog(3, row.id, row.nazivtipavozila)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSize]="[3]"
+                  [pageSizeOptions]="[3, 6, 12]"
+                  [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

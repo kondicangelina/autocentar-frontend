@@ -10,6 +10,7 @@ export class TipvozilaService {
 
   private readonly API_URL ='http://localhost:8081/autocentar/api/vozilo/tipvozila';
   dataChange: BehaviorSubject<Tipvozila[]>=new BehaviorSubject<Tipvozila[]>([]);
+
   constructor(private httpClient: HttpClient) {}
 
   public getAllTipvozila(): Observable<Tipvozila[]> {

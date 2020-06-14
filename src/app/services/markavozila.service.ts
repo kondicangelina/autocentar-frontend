@@ -13,7 +13,7 @@ export class MarkavozilaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllMarkaVozila(): Observable<Markavozila[]> {
+  public getAllMarkavozila(): Observable<Markavozila[]> {
     this.httpClient.get<Markavozila[]>(this.API_URL).subscribe(data=> {
       this.dataChange.next(data);
     },
@@ -40,14 +40,13 @@ export class MarkavozilaService {
     });
     return this.dataChange.asObservable();
   }
-  public addMarkaVozila(markavozila: Markavozila): void {
+  public addMarkavozila(markavozila: Markavozila): void {
     this.httpClient.post(this.API_URL, markavozila).subscribe();
   }
-  public updateMarkaVozila(markavozila: Markavozila): void {
+  public updateMarkavozila(markavozila: Markavozila): void {
     this.httpClient.put(this.API_URL+'/'+markavozila.id, markavozila).subscribe();
   }
-  public deleteMarkaVozila(id: number): void {
+  public deleteMarkavozila(id: number): void {
     this.httpClient.delete(this.API_URL+'/'+id).subscribe();
   }
-}
 }

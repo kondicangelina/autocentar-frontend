@@ -1,3 +1,93 @@
-<p>
-  vozilo-dialog works!
-</p>
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje vozila</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Izmena vozila: {{ data.id }}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje vozila: {{ data.id }}</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.kategorijausluga" placeholder="Kategorija usluga" name="kategorijausluga" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let kategorijausluga of kategorijeusluga" [value]="kategorijausluga">{{ kategorijausluga.nazivkategorijeusluge }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Broj sasije" [(ngModel)]="data.brojsasije" name=brojsasije" [disabled]="flag==3" required>
+        <mat-hint>Kombinacija slova i brojeva</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Broj motora" [(ngModel)]="data.brojmotora" name="brojmotora" [disabled]="flag==3" required>
+        <mat-hint>Kombinacija slova i brojeva</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Pogon vozila [(ngModel)]="data.pogonvozila" name="pogonvozila" [disabled]="flag==3" required>
+        <mat-hint>4x4 na primer</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Godiste" [(ngModel)]="data.godiste" name="godiste" [disabled]="flag==3" required>
+        <mat-hint>Na primer 2003</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Broj vrata" [(ngModel)]="data.brojvrata" name="brojvrata" [disabled]="flag==3" required>
+        <mat-hint>Na primer 4/5</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Broj mesta za sedenje" [(ngModel)]="data.brojmesta" name="brojmesta" [disabled]="flag==3" required>
+        <mat-hint>Na primer 5</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Vrsta goriva" [(ngModel)]="data.vrstagoriva" name="vrstaGoriva" [disabled]="flag==3" required>
+        <mat-hint>Na primer benzin</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Boja" [(ngModel)]="data.boja" name="boja" [disabled]="flag==3" required>
+        <mat-hint>Na primer crvena</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="KW/KS" [(ngModel)]="data.kw_ks" name="kw_ks" [disabled]="flag==3" required>
+        <mat-hint>Na primer 75/103</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Zeleni karton" [(ngModel)]="data.zelenikarton" name="zelenikarton" [disabled]="flag==3" required>
+        <mat-hint>1 ako poseduje ili 0 ako ne poseduje</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.kategorijavozila" placeholder="Kategorija vozila" name="kategorijavozila" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let kategorijavozila of kategorijevozila" [value]="kategorijavozila">{{ kategorijavozila.nazivkategorijevozila }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.tipvozila" placeholder="Tip vozila" name="tipvozila" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let tipvozila of tipovivozila" [value]="tipvozila">{{ tipvozila.nazivtipavozila }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.markavozila" placeholder="Marka vozila" name="markavozila" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let markavozila of markevozila" [value]="markavozila">{{ markavozila.nazivmarkevozila }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.modelvozila" placeholder="Model vozila" name="modelvozila" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let modelvozila of modelivozila" [value]="modelvozila">{{ modelvozila.nazivmodelavozila }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Cena vozila" [(ngModel)]="data.cenavozila" name="cenavozila" [disabled]="flag==3" required>
+        <mat-hint>Na primer 400000 </mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Oprema" [(ngModel)]="data.oprema" name="oprema" [disabled]="flag==3" required>
+        <mat-hint>Na primer airbag, automatski menjač..</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Slika" [(ngModel)]="data.slika" name="slika" [disabled]="flag==3" required>
+        <mat-hint>Dodavanje slike nije obavezno</mat-hint>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Sačuvaj</button>
+      <button mat-button *ngIf="flag == 2" type="submit" [disabled]="!formControl.valid" [mat-dialog-close="1" (click)="update()"]>Sačuvaj</button>
+      <button mat-button *ngIf="flag == 3" type="submit" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Poništi</button>
+    </div>
+  </form>
+</div>

@@ -15,12 +15,12 @@ export class TipvozilaComponent implements OnInit {
   displayedColumns = ['id', 'nazivtipavozila', 'actions'];
 
   dataSource: MatTableDataSource<Tipvozila>;
-  selektovanaKategorijausluga:Tipvozila;
+  selektovanTipvozila:Tipvozila;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(public httpClient: HttpClient,
-              public kategorijauslugaService: TipvozilaService,
+              public tipvozilaService: TipvozilaService,
               public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class TipvozilaComponent implements OnInit {
     this.dataSource.sort=this.sort;
   }
   public loadData() {
-    this.kategorijauslugaService.getAllTipvozila().subscribe(data=> {
+    this.tipvozilaService.getAllTipvozila().subscribe(data=> {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sortingDataAccessor=(data, property)=> {
         switch(property) {
@@ -44,7 +44,7 @@ export class TipvozilaComponent implements OnInit {
   }
 
   selectRow(row) {
-    this.selektovanaKategorijausluga=row;
+    this.selektovanTipvozila=row;
   }
   applyFilter(filterValue: string){
     filterValue = filterValue.trim();
