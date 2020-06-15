@@ -8,7 +8,7 @@ import { Rezervacija } from '../models/rezervacija';
 })
 export class RezervacijaService {
 
-  private readonly API_URL = 'http://localhost:8081/autocentar/rezervacija';
+  private readonly API_URL = 'http://localhost:8081/autocentar/api/rezervacija';
   dataChange: BehaviorSubject<Rezervacija[]> = new BehaviorSubject<Rezervacija[]>([]);
 
   constructor(private httpClient: HttpClient) { }

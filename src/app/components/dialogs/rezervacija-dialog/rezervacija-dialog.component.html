@@ -1,3 +1,54 @@
-<p>
-  rezervacija-dialog works!
-</p>
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje rezervacije</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Izmena rezervacije: {{ data.id }}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje rezervacije: {{ data.id }}</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.kategorijausluga" placeholder="Kategorija usluga" name="kategorijausluga" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let kategorijausluga of kategorijeusluga" [value]="kategorijausluga">{{ kategorijausluga.nazivkategorijeusluge }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.korisnikklijent" placeholder="Klijent" name="korisnikklijent" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let klijent of klijenti" [value]="klijent">{{ klijent.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.korisniksluzbenik" placeholder="Sluzbenik" name="korisniksluzbenik" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let sluzbenik of sluzbenici" [value]="sluzbenik">{{ sluzbenik.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Datum rezervacije" [(ngModel)]="data.datumrezervacije" name="datumrezervacije" [disabled]="flag==3" required>
+        <mat-hint>Kasko</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Datum pocetka" [(ngModel)]="data.datumpocetka" name="datumpocetka" [disabled]="flag==3" required>
+        <mat-hint>Kasko</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Datum rezervacije" [(ngModel)]="data.datumzavrsetka" name="datumzavrsetka" [disabled]="flag==3" required>
+        <mat-hint>Kasko</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Depozit" [(ngModel)]="data.depozit" name="depozit" [disabled]="flag==3" required>
+        <mat-hint>169427</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.vozilo" placeholder="Vozilo" name="vozilo" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let vozilo of vozila" [value]="vozilo">{{ vozilo.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Sačuvaj</button>
+      <button mat-button *ngIf="flag == 2" type="submit" [disabled]="!formControl.valid" [mat-dialog-close="1" (click)="update()"]>Sačuvaj</button>
+      <button mat-button *ngIf="flag == 3" type="submit" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Poništi</button>
+    </div>
+  </form>
+</div>
