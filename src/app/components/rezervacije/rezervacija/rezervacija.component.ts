@@ -38,6 +38,7 @@ export class RezervacijaComponent implements OnInit {
   public loadData() {
     this.rezervacijaService.getAllRezervacija().subscribe(data=> {
       this.dataSource = new MatTableDataSource(data);
+      console.log(this.dataSource);
       this.dataSource.sortingDataAccessor=(data, property)=> {
         switch(property) {
           case 'id': return data[property];

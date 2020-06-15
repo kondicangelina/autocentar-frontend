@@ -1,3 +1,60 @@
-<p>
-  naplata-dialog works!
-</p>
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje registracije</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Izmena registracije: {{ data.id }}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje registracije: {{ data.id }}</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.kategorijausluga" placeholder="Kategorija usluga" name="kategorijausluga" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let kategorijausluga of kategorijeusluga" [value]="kategorijausluga">{{ kategorijausluga.nazivkategorijeusluge }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Datum naplate" [(ngModel)]="data.datumnaplate" name="datumnaplate" [disabled]="flag==3" required>
+        <mat-hint>Kasko</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.rezervacija" placeholder="Rezervacija" name="rezervacija" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let rezervacija of rezervacije" [value]="rezervacija">{{ rezervacija.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.registracija" placeholder="Registacija" name="registracija" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let registracija of registracije" [value]="registracija">{{ registracija.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.korisnikklijent" placeholder="Klijent" name="korisnikklijent" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let klijent of klijenti" [value]="klijent">{{ klijent.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.korisniksluzbenik" placeholder="Sluzbenik" name="korisniksluzbenik" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let sluzbenik of sluzbenici" [value]="sluzbenik">{{ sluzbenik.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.cenovnik" placeholder="Cenovnik" name="cenovnik" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let cenovnik of cenovnici" [value]="cenovnik">{{ cenovnik.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Ukupno" [(ngModel)]="data.ukupno" name="ukupno" [disabled]="flag==3" required>
+        <mat-hint>3000</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Napomena" [(ngModel)]="data.napomena" name="napomena" [disabled]="flag==3" required>
+        <mat-hint>Neki tekst</mat-hint>
+      </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Sačuvaj</button>
+      <button mat-button *ngIf="flag == 2" type="submit" [disabled]="!formControl.valid" [mat-dialog-close="1" (click)="update()"]>Sačuvaj</button>
+      <button mat-button *ngIf="flag == 3" type="submit" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Poništi</button>
+    </div>
+  </form>
+</div>
+
