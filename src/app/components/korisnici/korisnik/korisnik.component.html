@@ -1,3 +1,75 @@
-<p>
-  korisnik works!
-</p>
+<mat-toolbar color="primary">
+  <span class="title-center">Korisnik fizicko lice</span>
+</mat-toolbar>
+<div class="container mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <mat-table #table [dataSource]="dataSource"  matSort class="mat-cell">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="imekorisnika" [sticky]="true">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Ime korisnika</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.imekorisnika }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="prezimekorisnika">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Prezime korisnika</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.prezimekorisnika }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="jmbgkorisnika">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>JMBG</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.jmbgkorisnika }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="adresakorisnika">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Adresa</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.adresakorisnika }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="korisnickoime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Korisnicko ime</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.korisnickoime }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="uloga">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>uloga</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.uloga }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="pravnolice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Pravno lice</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.pravnolice }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="korisnikpl">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Korisnik pravno lice</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.korisnikpl }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lozinka">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Lozinka</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.lozinka }}</mat-cell>
+    </ng-container>
+
+    <!--actions-->
+    <ng-container matColumnDef="actions" [sticky]="false">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="openDialog(1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="primary" (click)="openDialog(2, row.id, row.imekorisnika, row.prezimekorisnika, row.jmbgkorisnika, row.adresakorisnika, row.korisnickoime, row.uloga, row.pravnolice, row.korisnikpl, row.lozinka)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openDialog(3, row.id,  row.id, row.imekorisnika, row.prezimekorisnika, row.jmbgkorisnika, row.adresakorisnika, row.korisnickoime, row.uloga, row.pravnolice, row.korisnikpl, row.lozinka)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSize]="[5]"
+                  [pageSizeOptions]="[5, 10, 20]"
+                  [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
+

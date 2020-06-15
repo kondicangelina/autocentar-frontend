@@ -17,10 +17,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VoziloComponent implements OnInit {
 
-  displayedColumns = ['id', 'kategorijausluga', 'brojsasije',
+  displayedColumns = [ 'id', 'kategorijausluga', 'brojsasije',
     'brojmotora', 'pogonvozila', 'godiste', 'brojvrata', 'brojmesta',
     'vrstagoriva', 'boja', 'kw_ks', 'zelenikarton', 'kategorijavozila',
-    'tipvozila', 'markavozila', 'modelvozila', 'cenavozila', 'oprema', 'slika', 'actions'];
+    'tipvozila', 'markavozila', 'modelvozila', 'cenavozila', 'oprema', 'slika', 'actions' ];
 
   dataSource: MatTableDataSource<Vozilo>;
   selektovanoVozilo:Vozilo;

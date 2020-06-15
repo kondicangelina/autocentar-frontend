@@ -1,3 +1,30 @@
-<p>
-  osiguranje-dialog works!
-</p>
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje vozila</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Izmena vozila: {{ data.id }}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje vozila: {{ data.id }}</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Broj polise" [(ngModel)]="data.brojpolise" name="brojpolise" [disabled]="flag==3" required>
+        <mat-hint>169427</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Tip osiguranja" [(ngModel)]="data.tiposiguranja" name="tiposiguranja" [disabled]="flag==3" required>
+        <mat-hint>Kasko</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.vozilo" placeholder="Vozilo" name="vozilo" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let vozilo of vozila" [value]="vozilo">{{ vozilo.id }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Sačuvaj</button>
+      <button mat-button *ngIf="flag == 2" type="submit" [disabled]="!formControl.valid" [mat-dialog-close="1" (click)="update()"]>Sačuvaj</button>
+      <button mat-button *ngIf="flag == 3" type="submit" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Poništi</button>
+    </div>
+  </form>
+</div>

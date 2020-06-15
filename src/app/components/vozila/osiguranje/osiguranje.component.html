@@ -1,3 +1,50 @@
-<p>
-  osiguranje works!
-</p>
+<mat-toolbar color="primary">
+  <span class="title-center">Korisnik fizicko lice</span>
+</mat-toolbar>
+<div class="container mat-elevation-z8">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <mat-table #table [dataSource]="dataSource"  matSort class="mat-cell">
+    <ng-container matColumnDef="id" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="brojpolise" [sticky]="true">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Broj polise</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.brojpolise }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tiposiguranja">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Tip osiguranja</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.tiposiguranja }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="vozilo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>vozilo</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.vozilo }}</mat-cell>
+    </ng-container>
+
+    <!--actions-->
+    <ng-container matColumnDef="actions" [sticky]="false">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="openDialog(1)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="primary" (click)="openDialog(2, row.id, row.brojpolise, row.tiposiguranja, row.vozilo)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="openDialog(3, row.id, row.brojpolise, row.tiposiguranja, row.vozilo)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row style="cursor: default" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSize]="[5]"
+                  [pageSizeOptions]="[5, 10, 20]"
+                  [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

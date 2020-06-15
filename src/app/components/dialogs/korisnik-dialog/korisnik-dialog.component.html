@@ -1,3 +1,54 @@
-<p>
-  korisnik-dialog works!
-</p>
+<div class="container">
+  <h3 mat-dialog-title *ngIf="flag == 1">Dodavanje vozila</h3>
+  <h3 mat-dialog-title *ngIf="flag == 2">Izmena vozila: {{ data.id }}</h3>
+  <h3 mat-dialog-title *ngIf="flag == 3">Brisanje vozila: {{ data.id }}</h3>
+
+  <form class="mat-dialog-content" #formControl="ngForm">
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Ime korisnika" [(ngModel)]="data.imekorisnika" name="imekorisnika" [disabled]="flag==3" required>
+        <mat-hint>Marija</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Prezime korisnika" [(ngModel)]="data.prezimekorisnika" name="prezimekorisnika" [disabled]="flag==3" required>
+        <mat-hint>Markovic</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="JMBG" [(ngModel)]="data.jmbgkorisnika" name="jmbgkorisnika" [disabled]="flag==3" required>
+        <mat-hint>0503999777021</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Adresa korisnika" [(ngModel)]="data.adresakorisnika" name="adresakorisnika" [disabled]="flag==3" required>
+        <mat-hint>dr Sime Milosevica 4, Novi Sad</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Korisnicko ime" [(ngModel)]="data.korisnickoime" name="jmbgkorisnika" [disabled]="flag==3" required>
+        <mat-hint>majamar</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Uloga" [(ngModel)]="data.uloga" name="uloga" [disabled]="flag==3" required>
+        <mat-hint>1 klijent, 2 zaposleni, 3 admin</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="PL" [(ngModel)]="data.pravnolice" name="pravnolice" [disabled]="flag==3" required>
+        <mat-hint>1 jeste, 0 nije</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="data.korisnikpl" placeholder="Korisnik pravno lice" name="korisnikpl" [compareWith]="compareTo" [disabled]="flag == 3">
+          <mat-option *ngFor="let korisnikpl of korisnicipl" [value]="korisnikpl">{{ korisnikpl.nazivpl }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Lozinka" [(ngModel)]="data.lozinka" name="lozinka" [disabled]="flag==3" required>
+        <mat-hint>Kombinacija slova i brojeva</mat-hint>
+      </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button *ngIf="flag == 1" type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="add()">Sačuvaj</button>
+      <button mat-button *ngIf="flag == 2" type="submit" [disabled]="!formControl.valid" [mat-dialog-close="1" (click)="update()"]>Sačuvaj</button>
+      <button mat-button *ngIf="flag == 3" type="submit" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+      <button mat-button (click)="cancel()" tabindex="-1">Poništi</button>
+    </div>
+  </form>
+</div>
